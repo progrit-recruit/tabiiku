@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --cream:   #F5EFE6;
+  --cream2:  #EDE5D8;
+  --forest:  #1D3D2A;
+  --lime:    #C2E03A;
+  --lime-dark: #A8C828;
+  --white:   #FFFFFF;
+  --text:    #1A1A1A;
+  --muted:   #6B7280;
+  --border:  #E2D9CC;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
 }
+
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream2); }
+::-webkit-scrollbar-thumb { background: var(--lime-dark); border-radius: 3px; }
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.chat-bubble { animation: fadeInUp 0.28s ease-out; }
+
+@keyframes stampPop {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  60%  { transform: scale(1.2) rotate(4deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.stamp-collected { animation: stampPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+.pulse-dot   { animation: pulse-dot 1.3s ease-in-out infinite; }
+.pulse-dot:nth-child(2) { animation-delay: 0.2s; }
+.pulse-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-7px); }
+}
+.float-anim { animation: float 3s ease-in-out infinite; }
+
+/* ── Utility ── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.10);
+}
+
+/* Pill button */
+.btn-primary {
+  background: var(--forest);
+  color: #fff;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: background 0.18s, transform 0.18s;
+}
+.btn-primary:hover { background: #274d35; transform: scale(1.02); }
+
+.btn-lime {
+  background: var(--lime);
+  color: var(--forest);
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: background 0.18s, transform 0.18s;
+}
+.btn-lime:hover { background: var(--lime-dark); transform: scale(1.02); }
